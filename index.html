@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dev Log #1: Import Web từ GG Site lên Github</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    nav {
+      background-color: #34495e;
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    nav a {
+      color: #ecf0f1;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .log-entry {
+      background-color: white;
+      border-left: 4px solid #3498db;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    .log-entry h3::before {
+      content: attr(data-icon) ' ';
+      font-size: 1.2rem;
+    }
+
+    .log-entry h3 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+
+    .log-entry time {
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    .tags {
+      margin-top: 0.5rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background-color: #eee;
+      color: #555;
+      padding: 0.2rem 0.6rem;
+      margin-right: 0.3rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    footer {
+      text-align: center;
+      color: #aaa;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    a {
+      color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dev Log #1</h1>
+    <p>Import Web từ GG Site lên Github: Hành trình không quay đầu vì làm tiếp thì mệt mà bỏ thì lại tiếc công sức bỏ ra.</p>
+  </header>
+
+  <nav>
+    <a href="thanhlacmong.html">🏠 Trang Chủ</a>
+    <a href="thanhlacmong.html">🧰 Công Cụ Convert</a>
+    <a href="thanhlacmong.html">🎞 Video Troll</a>
+    <a href="thanhlacmong.html">📎 Hướng Dẫn Takeout</a>
+  </nav>
+
+  <main>
+    <section class="log-entry">
+      <h3 data-icon="🧠">2025-04-06: Định hướng</h3>
+      <time>2025-04-06</time>
+      <p>
+        - Code lại web(Tự code và bỏ cuộc sau 5 phút) bằng AI.<br>
+        → Web lỗi, thiếu chức năng như ba sọc thiếu nước.<br>
+        - Dùng Ctrl + U xem mã nguồn rồi copy dán thành file HTML.<br>
+        → Kết quả: web lỗi lên lỗi xuống, kết nối API Google loạn xì ngầu.<br>
+        - Hỏi ChatGPT: đề xuất một bầy AI như Claude, BLACKBOX, Phind...<br>
+        → Tất cả đều đứng hình trước hơn 800,000 ký tự hoặc yêu cầu nạp tiền dùng premium. Đm tư bản.<br>
+        - Lên mạng 5 phút: Google Takeout<br>
+        - Web hướng dẫn: <a href="https://www.steegle.com/google-sites/how-to/export-with-takeout" target="_blank">Steegle</a><br>
+        → Đọc như đọc Triết Học Mác Lênin, chả hiểu mẹ gì.<br>
+        - Xem YouTube 5 phút, tạm hiểu.
+      </p>
+      <div class="tags">
+        <span class="tag">AI</span>
+        <span class="tag">Export</span>
+        <span class="tag">Rage</span>
+      </div>
+    </section>
+
+    <section class="log-entry">
+      <h3 data-icon="📦">2025-04-06: Google Takeout</h3>
+      <time>2025-04-06</time>
+      <p>
+        - Vào Google Drive, tạo thư mục "First".<br>
+        - Dọn dẹp, chuyển site vào đúng folder.<br>
+        - Vào Takeout, bỏ chọn tất cả, chọn lại Drive.<br>
+        - Lần 1: fail sml vì chọn sai.<br>
+        - Làm lại từ đầu đm.<br>
+        → Cuối cùng cũng xuất được, tải về zip, giải nén, chạy ngon ăn.
+      </p>
+      <div class="tags">
+        <span class="tag">Takeout</span>
+        <span class="tag">Export</span>
+        <span class="tag">Drive</span>
+      </div>
+    </section>
+
+    <section class="log-entry">
+      <h3 data-icon="🚀">2025-04-06: Đăng lên Github</h3>
+      <time>2025-04-06</time>
+      <p>
+        - Tạo tài khoản GitHub: <code>khanh775hocden3giosang🐧</code><br>
+        - Upload file, rename "Trang Chủ" thành index.html (đừng hỏi vì sao, mấy con gà không biết code chúng mày chỉ biết là phải thế).<br>
+        - Settings-> Pages-> branch -> main, save. Đợi vài phút... web lên rồi.<br>
+        - Không load được ảnh? Phải chăng là vì lỗi quên upload folder ảnh do quên mất github không cho load folder (Hoặc là có nhưng mà tao không biết) Chỉ một con gà mới sai lỗi đần độn như vậy.<br>
+        - Vâng, tao là con gà đó. <br>
+        - Upload xong vẫn lỗi. Chỉ hiện mỗi logo. 😵
+      </p>
+      <div class="tags">
+        <span class="tag">GitHub</span>
+        <span class="tag">Deploy</span>
+        <span class="tag">ImageFail</span>
+      </div>
+    </section>
+
+    <section class="log-entry">
+      <h3 data-icon="🧽">2025-04-06: Fix lỗi ảnh</h3>
+      <time>2025-04-06</time>
+      <p>
+        - ChatGPT bó tay, mạng mù mờ. 
+        <br>Đi tắm.<br>
+        → Nhớ ra vụ web Archive OUROBOROS hồi trước cũng lỗi như thế nhưng sau khi chuyển ảnh sang .webp như lời cô Hằng thì chạy ngon.<br>
+        - Dùng Zalo Cloud để convert ảnh thủ công (tải lên rồi lại tải về nhưng thêm .webp ở sau, đm tối cổ vl)<br>
+        - Quá mệt, repo thành mớ hổ lốn.<br>
+        - Hóa thân Chí Phèo trong 5 phút. Chửi đời, chửi code, chửi web.<br>
+        - 11h30, não treo, mệt rồi, đel code nữa, đi ngủ.
+      </p>
+      <div class="tags">
+        <span class="tag">Images</span>
+        <span class="tag">.webp</span>
+        <span class="tag">Pain</span>
+      </div>
+    </section>
+
+    <section class="log-entry">
+      <h3 data-icon="🔧">2025-04-07: Tiếp tục fix lỗi ảnh</h3>
+      <time>2025-04-07</time>
+      <p>
+        - Tool online bắt xem quảng cáo, giới hạn convert, đòi tiền. Đm tư bản x2.<br>
+        - Tự làm tool convert, coi ở đây, muốn mã nguồn thì ctrl +U rồi dán vào file html khác: <a href="https://onionfingers7.github.io/tools/cv" target="_blank">ở đây</a><br>
+        - Quên sửa mã, chạy không nổi.<br>
+        - Mỗi file HTML hơn 1 triệu ký tự, dù có crtl F nhưng debug muốn trầm cảm.<br>
+        - Chuyển repo mới, upload lại từ đầu. Ảnh ổn rồi(5 giây trước thảm họa)<br>
+        - Nav bar lại lỗi. 💀
+      </p>
+      <div class="tags">
+        <span class="tag">ToolDev</span>
+        <span class="tag">webp</span>
+        <span class="tag">Convert</span>
+      </div>
+    </section>
+
+    <section class="log-entry">
+      <h3 data-icon="📚">2025-04-07: Sửa thanh điều hướng (Nav Bar)</h3>
+      <time>2025-04-07</time>
+      <p>
+        - Thanh điều hướng cầm tiền bỏ trốn, link đè lên nhau.<br>
+        - Lên w3school copy nav bar dán vô.<br>
+        - Fix float: left → right. Link vẫn như c*c.<br>
+        - Không biết lỗi ở đâu. Bắt đầu tự hỏi bản thân đang làm gì với cuộc đời mình<br>
+        - Tiếp tục sửa code nav bar trong 30 phút tiếp theo.<br>
+        → Chả có tác dụng mẹ gì:)<br>
+        - Dùng code JavaScript từ ChatGPT thay vì raw HTML<br>
+        - Dán vô web khác: hoạt động.<br>
+        → Suy ra lỗi nằm ở file export từ Takeout, đm gg éo nói sớm làm tao mất gần một tiếng cuộc đời.<br>
+        - Tạo nav bar pha ke nhìn giống mà nhưng mà là một khối riêng:))
+      </p>
+      <div class="tags">
+        <span class="tag">NavBar</span>
+        <span class="tag">CSS</span>
+        <span class="tag">Hack</span>
+      </div>
+    </section>
+
+    <section class="log-entry">
+      <h3 data-icon="✅">2025-04-07: Sửa lỗi nốt</h3>
+      <time>2025-04-07</time>
+      <p>
+        - Test lại thì nhận ra bản thân chỉ sửa file index, lặp lại gần như toàn bộ các bước trên cho hai trang con.<br>
+        - Sửa code đổi ảnh .jpg thành .webp cho hai cái web con.<br>
+        - Update lại link nút home vì đã đổi tên thành index.html<br>
+        - Dán nav bar bản Tàu Khựa vô hai trang con.<br>
+        → Web chạy mượt, cảm xúc dâng trào, mừng rớt nước mắt.<br>
+        - Gửi link cho hai thằng l Hải Sơn và Duy Hưng.<br>
+        - Viết dev log cc này làm sản phẩm.
+        <br><br>
+        🔗 <strong>Link sản phẩm cuối cùng:</strong> <a href="https://khanh775hocden3giosang.github.io/htler" target="_blank">https://khanh775hocden3giosang.github.io/htler</a>
+      </p>
+      <div class="tags">
+        <span class="tag">Final</span>
+        <span class="tag">Deployment</span>
+        <span class="tag">Victory</span>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Dev Log. Cảm ơn đã đồng hành trong chuyến hành trình chửi thề cùng HTML.
+  </footer>
+</body>
+</html>
