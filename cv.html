@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multi-Image WebP Converter</title>
+  <style>
+    :root {
+      --bg-color: #111;
+      --text-color: #ddd;
+      --accent-color: #ff0099;
+      --nav-bg: rgba(34, 34, 34, 0.95);
+      --header-height: 250px;
+      --transition-speed: 0.3s;
+      --btn-bg: #333;
+    }
+    /* RESET & BASE */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+    }
+    a {
+      text-decoration: none;
+      color: var(--accent-color);
+      transition: color var(--transition-speed);
+    }
+    a:hover {
+      color: #fff;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    /* HEADER */
+    header {
+      background: url("images/headerlogo.webp") center center no-repeat;
+      background-size: cover;
+      min-height: var(--header-height);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+    header .site-title {
+      font-size: 2.5em;
+      color: #d30070;
+      font-family: 'PT Sans Narrow', sans-serif;
+      margin-bottom: 8px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+    }
+    header .tagline {
+      font-size: 1.1em;
+      color: #c0c0c0;
+      font-style: italic;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
+    }
+    /* NAVIGATION (sticky) */
+    nav {
+      background-color: var(--nav-bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-item {
+      position: relative;
+      margin: 0 15px;
+      font-weight: bold;
+      padding: 5px 0;
+    }
+    .nav-item a {
+      padding: 5px 10px;
+      white-space: nowrap;
+    }
+    /* Dropdown styling for desktop */
+    .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: var(--nav-bg);
+      border: 1px solid rgba(255,0,153,0.3);
+      display: none;
+      min-width: 160px;
+      z-index: 200;
+    }
+    .dropdown a {
+      display: block;
+      padding: 8px 12px;
+      white-space: nowrap;
+    }
+    .dropdown a:hover {
+      background-color: rgba(255, 0, 153, 0.2);
+    }
+    .nav-item:hover .dropdown {
+      display: block;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+    .nav-right input[type="search"] {
+      padding: 6px 10px;
+      font-size: 1em;
+      width: 180px;
+      border: 1px solid #444;
+      border-radius: 3px;
+      background-color: #333;
+      color: var(--text-color);
+      transition: width var(--transition-speed);
+    }
+    .nav-right input[type="search"]:focus {
+      width: 250px;
+      outline: none;
+    }
+    /* Mobile Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .hamburger span {
+      height: 3px;
+      width: 25px;
+      background: var(--accent-color);
+      margin: 3px 0;
+      transition: all var(--transition-speed);
+    }
+    /* Mobile menu container fixed below nav */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px; /* Adjust based on nav height */
+      left: 0;
+      width: 100%;
+      background-color: var(--nav-bg);
+      flex-direction: column;
+      z-index: 90;
+    }
+    .mobile-menu a {
+      padding: 10px 20px;
+      border-top: 1px solid rgba(255,0,153,0.2);
+    }
+    /* CONTENT SECTIONS */
+    .content-section {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h2, h3 {
+      color: var(--accent-color);
+      margin-top: 15px;
+      font-family: 'PT Sans Narrow', sans-serif;
+    }
+    /* Refresh Icon next to Entries Database heading */
+    .refresh-icon {
+      font-size: 1em;
+      color: var(--accent-color);
+      cursor: pointer;
+      margin-left: 10px;
+      transition: transform var(--transition-speed);
+    }
+    .refresh-icon:hover {
+      transform: rotate(90deg);
+    }
+    /* ENTRIES DATABASE SECTION */
+    .entries {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+    }
+    .entry {
+      background-color: #222;
+      border: 1px solid #444;
+      border-radius: 4px;
+      padding: 15px;
+    }
+    .entry .entry-title {
+      font-size: 1.2em;
+      color: var(--accent-color);
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    .entry p {
+      margin: 5px 0;
+    }
+    .entry .details {
+      font-size: 0.9em;
+      color: #aaa;
+    }
+    /* OPTIONAL FEATURED GRID SECTION */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 20px;
+    }
+    .box {
+      background: #fff;
+      border-radius: 3px;
+      box-shadow: 0 0 6px -3px rgba(5,5,5,0.75);
+      padding: 10px;
+      transition: transform var(--transition-speed);
+    }
+    .box:hover {
+      transform: scale(1.02);
+    }
+    .box .title {
+      font-family: 'PT Sans Narrow', sans-serif;
+      font-weight: 700;
+      color: #fff;
+      background: var(--accent-color);
+      padding: 0.5em;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+    .box p {
+      margin: 10px 0;
+      color: #111;
+    }
+    /* FOOTER */
+    footer {
+      background-color: var(--nav-bg);
+      text-align: center;
+      padding: 15px;
+      font-size: 0.8em;
+      color: #bbb;
+    }
+    footer a {
+      color: var(--accent-color);
+      margin: 0 5px;
+      font-size: 0.9em;
+    }
+    /* Back-to-Top Button */
+    #back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #222;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: none;
+      transition: opacity var(--transition-speed), transform var(--transition-speed);
+      z-index: 100;
+      font-size: 1em;
+      border: 1px solid #444;
+    }
+    #back-to-top:hover {
+      transform: scale(1.05);
+    }
+    /* SCROLLBAR CUSTOMIZATION */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #111;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: repeating-linear-gradient(
+        135deg,
+        #444 0,
+        #444 5px,
+        #333 5px,
+        #333 10px
+      );
+      border-radius: 2px;
+      border: 1px solid #000;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: repeating-linear-gradient(
+        135deg,
+        #666 0,
+        #666 5px,
+        #444 5px,
+        #444 10px
+      );
+    }
+    html {
+      scrollbar-color: #444 #111;
+      scrollbar-width: thin;
+    }
+    /* MEDIA QUERIES */
+    @media (max-width: 768px) {
+      .nav-left {
+        display: none; /* Hide desktop nav items on mobile */
+      }
+      .hamburger {
+        display: flex;
+      }
+      .nav-right {
+        flex-grow: 1;
+        justify-content: flex-end;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="site-title">Multi-Image WebP Converter</div>
+    <div class="tagline">Convert your images to WebP with ease</div>
+  </header>
+  <nav>
+    <div class="nav-left">
+      <div class="nav-item"><a href="#">Home</a></div>
+      <div class="nav-item"><a href="#">Converter</a></div>
+      <div class="nav-item"><a href="#">About</a></div>
+      <div class="nav-item">
+        <a href="#">More</a>
+        <div class="dropdown">
+          <a href="#">Option 1</a>
+          <a href="#">Option 2</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-right">
+      <input type="search" placeholder="Search...">
+    </div>
+  </nav>
+  <section class="content-section">
+    <h2>Select Images to Convert</h2>
+    <input type="file" id="imageInput" accept="image/*" multiple>
+    <div id="previewContainer" style="margin-top:20px; display: flex; flex-wrap: wrap; gap:10px;"></div>
+    <button id="convertButton" style="margin-top:20px; padding:10px 20px; background: var(--btn-bg); color: var(--text-color); border: none; cursor: pointer;">Convert All to WebP</button>
+    <div id="downloadContainer" style="margin-top:20px;"></div>
+  </section>
+  <!-- Hidden canvas for image processing -->
+  <canvas id="canvas" style="display:none;"></canvas>
+  <footer>
+    &copy; 2025 Your Company Name. All rights reserved.
+  </footer>
+  <script>
+    const imageInput = document.getElementById('imageInput');
+    const previewContainer = document.getElementById('previewContainer');
+    const convertButton = document.getElementById('convertButton');
+    const downloadContainer = document.getElementById('downloadContainer');
+    const canvas = document.getElementById('canvas');
+    let imageFiles = [];
+
+    // Handle file selection and display preview thumbnails
+    imageInput.addEventListener('change', function(e) {
+      imageFiles = Array.from(e.target.files);
+      previewContainer.innerHTML = '';
+      downloadContainer.innerHTML = '';
+      imageFiles.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const img = document.createElement('img');
+          img.src = event.target.result;
+          img.style.width = '150px';
+          img.style.border = '2px solid var(--accent-color)';
+          img.style.padding = '5px';
+          previewContainer.appendChild(img);
+        }
+        reader.readAsDataURL(file);
+      });
+    });
+
+    // Convert each selected image to WebP
+    convertButton.addEventListener('click', function() {
+      if (imageFiles.length === 0) {
+        alert('Please select at least one image!');
+        return;
+      }
+      downloadContainer.innerHTML = '';
+      imageFiles.forEach(file => {
+        const img = new Image();
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          img.src = event.target.result;
+        }
+        reader.readAsDataURL(file);
+        img.onload = function() {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          const webpDataURL = canvas.toDataURL('image/webp', 0.8);
+          const downloadLink = document.createElement('a');
+          downloadLink.href = webpDataURL;
+          downloadLink.download = file.name.replace(/\.[^/.]+$/, "") + '.webp';
+          downloadLink.textContent = 'Download ' + file.name.replace(/\.[^/.]+$/, "") + '.webp';
+          downloadLink.style.display = 'block';
+          downloadLink.style.marginTop = '10px';
+          downloadLink.style.color = 'var(--accent-color)';
+          downloadContainer.appendChild(downloadLink);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
